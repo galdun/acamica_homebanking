@@ -6,7 +6,7 @@ var valorAgua = 350;
 var valorTelefono = 425;
 var valorLuz = 210;
 var valorInternet = 570;
-
+var arrayCuentasAmiga = [1234567, 7654321];
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
 window.onload = function() {
@@ -44,7 +44,6 @@ function pideBilletesDeCien (valorExtraccion){
         return true;
     else
         return false;
-    
 }
 
 //Funcion que ejecuta el debito en la cuenta
@@ -133,12 +132,24 @@ function pagarServicio() {
             debitaServicio(valorTelefono, "Telefono");
             break;
     }
-
     actualizarSaldoEnPantalla(); 
 }
 
-function transferirDinero() {
 
+function transferirDinero() {
+    var dineroATransferir = parseInt(prompt("Ingrese el monto que desea transferir: "+""));
+    if(haySaldoDisponible(dineroATransferir)){
+        var cuentaDestino = parseInt(prompt("Ingrese el numero de cuenta al qeu desea transferir: "+""));
+        if(arrayCuentasAmiga.includes(cuentaDestino)){
+            restaDinero(dineroATransferir)
+            alert("Se ha transferido: $"+ dineroATransferir + "\nCuenta Destino: "+cuentaDestino);
+            actualizarSaldoEnPantalla();
+        }else{
+            alert("La cuenta ingresada no se encuentra registrada");
+        }
+    }else{
+        alert("No posee saldo suficiente para realizar la transferencia.");
+    }
 }
 
 function iniciarSesion() {

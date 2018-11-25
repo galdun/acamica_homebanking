@@ -1,5 +1,6 @@
 //Declaración de variables
-var nombreUsuario = 'Guillermo'
+var nombreUsuario = 'Guillermo';
+var pass = 123123123;
 var saldoCuenta = 10000;
 var limiteExtraccion = 1500;
 var valorAgua = 350;
@@ -152,8 +153,18 @@ function transferirDinero() {
     }
 }
 
-function iniciarSesion() {
+function iniciarSesion(){
 
+    console.log("done");
+    if(parseInt(prompt("Bienvenido/a "+nombreUsuario + " por favor ingresa tu password"))=== pass){
+        console.log("Login Correcto");
+        actualizarSaldoEnPantalla();
+    }else{
+        console.log("wrong pass man!");
+        alert("Su dinero ha sido retenido por razones de seguridad.");
+        saldoCuenta = 0;
+        actualizarSaldoEnPantalla();
+    }
 }
 
 //Funciones que actualizan el valor de las variables en el HTML

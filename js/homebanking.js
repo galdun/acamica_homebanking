@@ -1,6 +1,6 @@
 //Declaración de variables
 var nombreUsuario = 'Guillermo';
-var pass = 123123123;
+var pass = 123123;
 var saldoCuenta = 10000;
 var limiteExtraccion = 1500;
 var valorAgua = 350;
@@ -8,7 +8,7 @@ var valorTelefono = 425;
 var valorLuz = 210;
 var valorInternet = 570;
 var arrayCuentasAmiga = [1234567, 7654321];
-
+iniciarSesion();
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
 window.onload = function() {
     cargarNombreEnPantalla();
@@ -154,18 +154,25 @@ function transferirDinero() {
 }
 
 function iniciarSesion(){
-
-    console.log("done");
-    if(parseInt(prompt("Bienvenido/a "+nombreUsuario + " por favor ingresa tu password"))=== pass){
-        console.log("Login Correcto");
-        actualizarSaldoEnPantalla();
+    codigoIngresado = parseInt(prompt("Bienvenido/a "+nombreUsuario + " por favor ingresa tu password"));
+    if(codigoIngresado === pass){
+        alert("Bienvenido/a "+ nombreUsuario + " ya podes comenzar a realizar operaciones.");
     }else{
-        console.log("wrong pass man!");
-        alert("Su dinero ha sido retenido por razones de seguridad.");
-        saldoCuenta = 0;
-        actualizarSaldoEnPantalla();
+        var cantiadadErrores = 1;
+        while (cantiadadErrores < 3 && codigoIngresado !== pass){
+            alert("Codigo incorrecto por favor intente nuevamente.");
+            codigoIngresado = parseInt(prompt("Bienvenido/a "+nombreUsuario + " por favor ingresa tu password"));
+            cantiadadErrores++;
+        }
+        if(codigoIngresado === pass){
+            alert("Bienvenido/a "+ nombreUsuario + " ya podes comenzar a realizar operaciones.");
+        }else{
+            saldoCuenta = 0;
+            alert("Demasiados intentos fallidos Su dinero ha sido retenido por razones de seguridad.")
+        }
     }
 }
+
 
 //Funciones que actualizan el valor de las variables en el HTML
 function cargarNombreEnPantalla() {
@@ -179,3 +186,4 @@ function actualizarSaldoEnPantalla() {
 function actualizarLimiteEnPantalla() {
     document.getElementById("limite-extraccion").innerHTML = "Tu límite de extracción es: $" + limiteExtraccion;
 }
+
